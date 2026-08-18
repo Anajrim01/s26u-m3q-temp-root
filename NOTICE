@@ -1,0 +1,16 @@
+M3Q Root for Galaxy S26 Ultra
+Copyright 2026 monovibe
+
+Licensed under the Apache License, Version 2.0.
+
+This project contains or derives from Apache-2.0-licensed work including:
+
+- Root My Galaxy Payloads by BuSung-dev
+- the packaging pattern from YuKongA/ghostlock-app
+- Shizuku API by RikkaApps
+
+The Samsung 8EG5 one-shot route was cross-checked against the Apache-2.0-
+licensed CyberMeowfia research published by Nebula Security.
+
+See android/NOTICE and exploit/vendor/root-my-galaxy/UPSTREAM.md for detailed
+provenance. Third-party copyright notices remain with their source files.

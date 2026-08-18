@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="m3q_primary">#9BCBFA</color>
+    <color name="m3q_on_primary">#003355</color>
+    <color name="m3q_primary_container">#164A70</color>
+    <color name="m3q_on_primary_container">#D0E7FF</color>
+    <color name="m3q_secondary">#B2CCC6</color>
+    <color name="m3q_on_secondary">#1D3531</color>
+    <color name="m3q_secondary_container">#344C48</color>
+    <color name="m3q_on_secondary_container">#CEE9E3</color>
+    <color name="m3q_background">#0D1117</color>
+    <color name="m3q_surface">#151B23</color>
+    <color name="m3q_surface_variant">#202833</color>
+    <color name="m3q_on_surface">#E6EDF3</color>
+    <color name="m3q_on_surface_variant">#AAB7C4</color>
+    <color name="m3q_outline">#82909E</color>
+    <color name="m3q_outline_variant">#37424E</color>
+    <color name="m3q_success">#52D89A</color>
+    <color name="m3q_warning">#FFB65C</color>
+    <color name="m3q_error">#FFB4AB</color>
+    <color name="m3q_neutral">#AAB7C4</color>
+    <color name="m3q_log_surface">#090D12</color>
+    <color name="m3q_log_text">#D7E2EC</color>
+</resources>

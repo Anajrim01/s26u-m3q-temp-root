@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.M3QRoot" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/m3q_primary</item>
+        <item name="colorOnPrimary">@color/m3q_on_primary</item>
+        <item name="colorPrimaryContainer">@color/m3q_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/m3q_on_primary_container</item>
+        <item name="colorSecondary">@color/m3q_secondary</item>
+        <item name="colorOnSecondary">@color/m3q_on_secondary</item>
+        <item name="colorSecondaryContainer">@color/m3q_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/m3q_on_secondary_container</item>
+        <item name="colorSurface">@color/m3q_surface</item>
+        <item name="colorSurfaceVariant">@color/m3q_surface_variant</item>
+        <item name="colorOnSurface">@color/m3q_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/m3q_on_surface_variant</item>
+        <item name="colorOutline">@color/m3q_outline</item>
+        <item name="colorOutlineVariant">@color/m3q_outline_variant</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowBackground">@color/m3q_background</item>
+        <item name="android:statusBarColor">@color/m3q_background</item>
+        <item name="android:navigationBarColor">@color/m3q_background</item>
+        <item name="android:windowLightStatusBar">@bool/m3q_light_system_bars</item>
+        <item name="android:windowLightNavigationBar">@bool/m3q_light_system_bars</item>
+    </style>
+</resources>

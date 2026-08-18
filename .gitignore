@@ -1,0 +1,25 @@
+.codegraph/
+.codex-remote-attachments/
+.private/
+.secrets/
+
+# Local and generated files
+*.log
+*.apk
+*.aab
+*.jks
+*.keystore
+**/__pycache__/
+*.py[cod]
+
+# Native build outputs
+exploit/build/
+
+# Android/Gradle outputs
+android/.gradle/
+android/.idea/
+android/build/
+android/app/build/
+android/app/src/main/jniLibs/
+android/device-runs/
+android/local.properties

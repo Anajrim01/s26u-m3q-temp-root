@@ -1,0 +1,17 @@
+This launcher follows the minimal one-tap Android packaging pattern used by
+YuKongA/ghostlock-app (Apache License 2.0).
+
+The physical-P0 oracle under `exploit/vendor/root-my-galaxy` is derived from
+BuSung-dev/Root-My-Galaxy-Payloads. Its imported snapshot is
+`75bdeb2f4b1a2ca81ac78651168351297af67114`; the vendored engine files were
+also verified byte-identical to upstream HEAD
+`32e5a390e8094fd0d212ade094f2570d46253232`. It is distributed under the
+vendored Apache License 2.0.
+
+The optional shell fast path uses RikkaApps/Shizuku-API 13.1.5 (`api` and
+`provider` artifacts), distributed under the Apache License 2.0.
+
+Reference: https://github.com/YuKongA/ghostlock-app
+Payload architecture reference:
+https://github.com/BuSung-dev/Root-My-Galaxy-Payloads
+Shizuku API reference: https://github.com/RikkaApps/Shizuku-API
