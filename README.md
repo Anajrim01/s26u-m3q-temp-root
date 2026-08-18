@@ -19,6 +19,8 @@ A manual, reboot-ephemeral KernelSU root launcher for one exact Korean Galaxy S2
 
 The app checks the model, full build fingerprint, and kernel release before enabling a kernel action. Any mismatch is rejected.
 
+> **Shizuku is strongly recommended and effectively required for the best result.** The fallback route remains available, but an already-running and authorized Shizuku server enables the fast tracefs KASLR route. In practice, prepare Shizuku first to greatly improve root speed and the chance of a successful run.
+
 ## App functions
 
 - **Temporary root:** obtains RAM-only root and activates the bundled firmware-matched KernelSU late-load component.
@@ -34,7 +36,7 @@ There is no automatic post-boot root. A real reboot removes the temporary root a
 1. Download the APK from [GitHub Releases](../../releases).
 2. Compare its SHA-256 with the release notes.
 3. Install the APK and KernelSU Manager (`me.weishu.kernelsu`).
-4. Optionally start Shizuku through ADB and approve this app once.
+4. Start Shizuku through ADB and approve this app once. Treat this as the standard setup for the best root speed and success rate.
 5. Wait until kernel uptime reaches 180 seconds.
 6. Open the app and tap **Temporary root** once. Do not retry an uncertain kernel run in the same boot.
 7. If modules or LSPosed are inactive, run **Module reload**, then **Soft boot**.

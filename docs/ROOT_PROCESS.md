@@ -27,6 +27,8 @@ The shortest trusted route is selected:
 
 No user-entered kernel address or remote target catalog is accepted.
 
+The physical-P0 route is a fallback. For practical use, start and authorize Shizuku first: the tracefs route is substantially faster and avoids the less reliable fallback search, greatly improving the chance and speed of a successful root run.
+
 ## 4. Kernel write and bounded R/W
 
 The native payload uses the CVE-2026-43499 dangling PI-waiter condition, reclaims the required order-3 workspace, and reconstructs the waiter through `pselect()` fd sets. Two isolated sacrificial regions must produce fast, bounded walk verdicts before carrier writes begin.

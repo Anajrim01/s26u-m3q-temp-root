@@ -27,6 +27,8 @@ Bootstrap root가 이미 살아 있으면 exploit을 다시 실행하지 않고 
 
 사용자가 커널 주소를 입력하거나 원격 target catalog를 내려받는 방식은 사용하지 않습니다.
 
+Physical-P0 경로는 fallback입니다. 실제 사용에서는 Shizuku를 먼저 실행하고 권한을 승인하세요. Tracefs 경로가 훨씬 빠르고 상대적으로 불안정한 fallback 탐색을 피하므로 루트 성공 가능성과 실행 속도를 크게 높입니다.
+
 ## 4. Kernel write와 제한된 R/W
 
 Native payload는 CVE-2026-43499 dangling PI waiter 조건을 만들고 필요한 order-3 workspace를 재할당한 뒤 `pselect()` fd-set으로 waiter를 재구성합니다. Carrier write 전에 서로 분리된 희생 region 두 개가 빠르고 제한 시간 안의 walk 판정을 모두 통과해야 합니다.
