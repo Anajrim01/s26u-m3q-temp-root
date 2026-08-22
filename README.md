@@ -2,7 +2,7 @@
 
 [한국어](README.ko.md)
 
-A manual, reboot-ephemeral KernelSU root launcher for one exact international Galaxy S26 Ultra firmware build.
+A manual, reboot-ephemeral KernelSU root launcher for one exact EU Galaxy S26 Ultra firmware build.
 
 > **Exact target only.** Do not install or run this build on another model, region, firmware, or kernel. A failed kernel attempt can panic or reboot the device.
 

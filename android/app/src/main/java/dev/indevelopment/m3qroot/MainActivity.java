@@ -49,10 +49,10 @@ public final class MainActivity extends AppCompatActivity {
                 if (!shizukuPermissionPending.compareAndSet(true, false)) return;
                 ui.post(() -> {
                     if (grantResult == PackageManager.PERMISSION_GRANTED) {
-                        append("Shizuku shell 권한 승인 완료");
+                        append("Shizuku shell permission granted");
                         beginExploit(true);
                     } else {
-                        abortPendingRun("Shizuku 권한이 거부되어 실행하지 않았습니다.");
+                        abortPendingRun("Shizuku permission denied; exploit was not run.");
                     }
                 });
             };
@@ -83,7 +83,7 @@ public final class MainActivity extends AppCompatActivity {
         getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
                 OnBackInvokedDispatcher.PRIORITY_DEFAULT, () -> {
                     if (running.get()) {
-                        append("커널 작업이 끝날 때까지 앱을 닫을 수 없습니다.");
+                        append("The app cannot be closed while the kernel operation is running.");
                     } else {
                         finish();
                     }
@@ -102,15 +102,15 @@ public final class MainActivity extends AppCompatActivity {
         });
 
         append("==== device diagnostics ====");
-        append("모델: " + Build.MODEL);
-        append("커널: " + System.getProperty("os.version", "unknown"));
-        append("펌웨어: " + Build.FINGERPRINT);
+        append("Model: " + Build.MODEL);
+        append("Kernel: " + System.getProperty("os.version", "unknown"));
+        append("Firmware: " + Build.FINGERPRINT);
 
         if (!engine.isSupported()) {
-            setStatus("지원되지 않는 펌웨어", STATUS_WARNING);
-            setStatusDetail("이 앱은 SM-S948B AZG5 펌웨어에서만 실행할 수 있습니다.");
+            setStatus("Unsupported firmware", STATUS_WARNING);
+            setStatusDetail("This app only runs on SM-S948B AZG5 firmware.");
             run.setEnabled(false);
-            append("정확한 SM-S948B AZG5 빌드에서만 실행할 수 있습니다.");
+            append("Only the exact SM-S948B AZG5 build is supported.");
         } else {
             setStatus(getString(R.string.status_checking), STATUS_WORKING);
             setStatusDetail(getString(R.string.status_checking_detail));
@@ -154,10 +154,10 @@ public final class MainActivity extends AppCompatActivity {
         statusRefresh.setOnClickListener(v -> worker.execute(this::refreshRootState));
         findViewById(R.id.root_manager).setOnClickListener(v ->
                 openPackage(KSU_MANAGER_PACKAGE,
-                        "KernelSU Manager가 설치되어 있지 않습니다."));
+                        "KernelSU Manager is not installed."));
         findViewById(R.id.shizuku_manager).setOnClickListener(v ->
                 openPackage(SHIZUKU_MANAGER_PACKAGE,
-                        "Shizuku Manager가 설치되어 있지 않습니다."));
+                        "Shizuku Manager is not installed."));
         findViewById(R.id.share_log).setOnClickListener(v -> shareLastLog());
         diagnosticsToggle.setOnClickListener(v -> toggleDiagnostics());
     }
@@ -193,9 +193,9 @@ public final class MainActivity extends AppCompatActivity {
                 return;
             }
             if (current.bootstrap()) {
-                append("bootstrap root 감지 · exploit 재실행 없이 KernelSU만 활성화합니다.");
-                setStatus("KernelSU 활성화 중", STATUS_WORKING);
-                setStatusDetail("커널 쓰기를 반복하지 않고 KernelSU 구성을 마무리합니다.");
+                append("Bootstrap root detected · activating KernelSU without rerunning the exploit.");
+                setStatus("Activating KernelSU", STATUS_WORKING);
+                setStatusDetail("Finishing KernelSU configuration without repeating kernel writes.");
                 ui.post(this::lockUiForRun);
                 int code = engine.activateKernelSu();
                 append("KernelSU activation exit=" + code);
@@ -211,9 +211,9 @@ public final class MainActivity extends AppCompatActivity {
                 ui.post(() -> {
                     run.setVisibility(View.VISIBLE);
                     run.setEnabled(false);
-                    setStatus("이번 부팅에서 이미 실행됨", STATUS_WARNING);
-                    setStatusDetail("안전을 위해 재부팅 전에는 다시 실행할 수 없습니다.");
-                    append("같은 boot ID의 재시도를 차단했습니다.");
+                    setStatus("Already run this boot", STATUS_WARNING);
+                    setStatusDetail("For safety, it cannot be run again before reboot.");
+                    append("Blocked a retry with the same boot ID.");
                     renderDashboard(current);
                 });
                 return;
@@ -240,16 +240,16 @@ public final class MainActivity extends AppCompatActivity {
 
         if (ShizukuShell.isRunning()) {
             int uid = ShizukuShell.uid();
-            append("Shizuku 감지: uid=" + uid + " · tracefs fast path");
+            append("Shizuku detected: uid=" + uid + " · tracefs fast path");
             if (!ShizukuShell.isGranted()) {
-                setStatus("Shizuku 권한 승인 필요", STATUS_WORKING);
-                setStatusDetail("표시되는 Shizuku 권한 요청을 승인하세요.");
+                setStatus("Shizuku permission required", STATUS_WORKING);
+                setStatusDetail("Approve the Shizuku permission request that appears.");
                 try {
                     shizukuPermissionPending.set(true);
                     Shizuku.requestPermission(SHIZUKU_PERMISSION_REQUEST);
                 } catch (RuntimeException error) {
                     shizukuPermissionPending.set(false);
-                    abortPendingRun("Shizuku 권한 요청 오류: " + error.getMessage());
+                    abortPendingRun("Shizuku permission request error: " + error.getMessage());
                 }
                 return;
             }
@@ -257,7 +257,7 @@ public final class MainActivity extends AppCompatActivity {
             return;
         }
 
-        append("Shizuku가 실행 중이 아니므로 exact Image physical-P0 경로를 사용합니다.");
+        append("Shizuku is not running; using the exact Image physical-P0 path.");
         beginExploit(false);
     }
 
@@ -265,18 +265,18 @@ public final class MainActivity extends AppCompatActivity {
         long settleMillis = M3qRootEngine.bootSettleRemainingMillis();
         if (settleMillis > 0) {
             long settleSeconds = (settleMillis + 999) / 1000;
-            abortPendingRun("부팅 직후 시스템 안정화를 위해 약 " + settleSeconds
-                    + "초 후 다시 실행하세요. 이번 부팅의 시도 횟수는 소비하지 않았습니다.");
+            abortPendingRun("Wait about " + settleSeconds
+                    + " seconds after boot for system stabilization, then try again. This boot's attempt was not consumed.");
             return;
         }
         if (!engine.markAttemptForThisBoot()) {
-            abortPendingRun("부팅 상태를 확인할 수 없어 커널 실행을 거부했습니다.");
+            abortPendingRun("Kernel execution was refused because boot state could not be verified.");
             return;
         }
-        setStatus("임시 루트 활성화 중", STATUS_WORKING);
+        setStatus("Activating temporary root", STATUS_WORKING);
         setStatusDetail(useShizuku
-                ? "Shizuku 연결을 이용해 안전 조건을 확인하고 있습니다."
-                : "기기 보안 상태를 확인한 뒤 임시 루트를 적용합니다.");
+                ? "Checking safety conditions through the Shizuku connection."
+                : "Checking device security state before applying temporary root.");
         worker.execute(() -> {
             int code = engine.runFreshRoot(useShizuku);
             append("fresh-root exit=" + code);
@@ -301,13 +301,13 @@ public final class MainActivity extends AppCompatActivity {
     private void startModuleReload() {
         if (!running.compareAndSet(false, true)) return;
         lockUiForRun();
-        setStatus("KernelSU 모듈 재로드 중", STATUS_WORKING);
-        setStatusDetail("KernelSU 모듈 시작 단계를 다시 실행하고 있습니다.");
+        setStatus("Reloading KernelSU modules", STATUS_WORKING);
+        setStatusDetail("Running the KernelSU module startup stages again.");
         append("==== KernelSU module reapply start ====");
         worker.execute(() -> {
             M3qRootEngine.RootState state = engine.checkRoot(false);
             if (!state.ready()) {
-                append("KernelSU 임시 루트가 활성 상태가 아니어서 실행하지 않았습니다.");
+                append("KernelSU temporary root is not active; nothing was run.");
                 finishMaintenance(126, state, "", "");
                 return;
             }
@@ -318,8 +318,8 @@ public final class MainActivity extends AppCompatActivity {
                 return;
             }
             finishMaintenance(code, engine.checkRoot(false),
-                    "모듈 재로드 완료",
-                    "KernelSU 모듈이 다시 적용되었습니다. 이제 소프트 부팅을 진행하세요.");
+                    "Modules reloaded",
+                    "KernelSU modules were reapplied. Run Soft boot next.");
         });
     }
 
@@ -336,13 +336,13 @@ public final class MainActivity extends AppCompatActivity {
     private void startSoftBoot() {
         if (!running.compareAndSet(false, true)) return;
         lockUiForRun();
-        setStatus("소프트 부팅 준비 중", STATUS_WORKING);
-        setStatusDetail("Android 앱 환경(Zygote)을 다시 시작합니다.");
-        append("Zygote 재시작을 요청합니다. 성공하면 이 앱도 종료됩니다.");
+        setStatus("Preparing soft boot", STATUS_WORKING);
+        setStatusDetail("Restarting the Android app environment (Zygote).");
+        append("Requesting a Zygote restart. This app will also exit if it succeeds.");
         worker.execute(() -> {
             M3qRootEngine.RootState state = engine.checkRoot(false);
             if (!state.ready()) {
-                append("KernelSU 임시 루트가 활성 상태가 아니어서 실행하지 않았습니다.");
+                append("KernelSU temporary root is not active; nothing was run.");
                 finishMaintenance(126, state, "", "");
                 return;
             }
@@ -353,8 +353,8 @@ public final class MainActivity extends AppCompatActivity {
                 return;
             }
             finishMaintenance(code, engine.checkRoot(false),
-                    "소프트 부팅 요청 완료",
-                    "잠시 후 LSPosed 관리자에서 활성 상태를 확인하세요.");
+                    "Soft boot requested",
+                    "Check the LSPosed manager for active status in a moment.");
         });
     }
 
@@ -371,13 +371,13 @@ public final class MainActivity extends AppCompatActivity {
                 return;
             }
             String reason = switch (code) {
-                case 124 -> "작업 완료를 확인하지 못했습니다.";
-                case 125 -> "KernelSU 구성 검증에 실패했습니다.";
-                case 126 -> "KernelSU 루트 권한이 필요합니다.";
-                default -> "명령 실행에 실패했습니다. code=" + code;
+                case 124 -> "Could not confirm that the operation completed.";
+                case 125 -> "KernelSU configuration verification failed.";
+                case 126 -> "KernelSU root permission is required.";
+                default -> "Command failed. code=" + code;
             };
-            setStatus("작업 실패", STATUS_WARNING);
-            setStatusDetail(reason + " 상태를 다시 확인하세요.");
+            setStatus("Operation failed", STATUS_WARNING);
+            setStatusDetail(reason + " Check the status again.");
         });
     }
 
@@ -399,7 +399,7 @@ public final class MainActivity extends AppCompatActivity {
             restartZygote.setEnabled(false);
             statusRefresh.setEnabled(true);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            setStatus("실행하지 않음", STATUS_NEUTRAL);
+            setStatus("Not run", STATUS_NEUTRAL);
             setStatusDetail(message);
         });
     }
@@ -412,30 +412,30 @@ public final class MainActivity extends AppCompatActivity {
     private void renderRootState(M3qRootEngine.RootState state) {
         if (state.terminationUnconfirmed()) {
             run.setVisibility(View.VISIBLE);
-            setStatus("작업 상태 확인 불가", STATUS_WARNING);
-            setStatusDetail("안전을 위해 기기를 재부팅한 뒤 다시 확인하세요.");
+            setStatus("Operation status unknown", STATUS_WARNING);
+            setStatusDetail("For safety, reboot the device before checking again.");
             run.setText(R.string.run_reboot_check);
             run.setEnabled(false);
         } else if (state.ready()) {
-            setStatus("임시 루트 활성", STATUS_SUCCESS);
-            setStatusDetail("KernelSU 3.2.5 · 재부팅 시 해제");
+            setStatus("Temporary root active", STATUS_SUCCESS);
+            setStatusDetail("KernelSU 3.2.5 · cleared on reboot");
             run.setVisibility(View.GONE);
         } else if (state.bootstrap()) {
             run.setVisibility(View.VISIBLE);
-            setStatus("루트 준비됨", STATUS_WORKING);
-            setStatusDetail("KernelSU 활성화 단계만 남아 있습니다.");
+            setStatus("Root ready", STATUS_WORKING);
+            setStatusDetail("Only KernelSU activation remains.");
             run.setText(R.string.run_kernel_su_activate);
             run.setEnabled(true);
         } else if (engine.hasAttemptedThisBoot()) {
             run.setVisibility(View.VISIBLE);
-            setStatus("이번 부팅에서 이미 실행됨", STATUS_WARNING);
-            setStatusDetail("안전을 위해 재부팅 전에는 다시 실행할 수 없습니다.");
+            setStatus("Already run this boot", STATUS_WARNING);
+            setStatusDetail("For safety, it cannot be run again before reboot.");
             run.setText(R.string.run_reboot_retry);
             run.setEnabled(false);
         } else {
             run.setVisibility(View.VISIBLE);
-            setStatus("임시 루트 비활성", STATUS_NEUTRAL);
-            setStatusDetail("지원 기기 확인 완료 · 실행 준비");
+            setStatus("Temporary root inactive", STATUS_NEUTRAL);
+            setStatusDetail("Supported device confirmed · ready to run");
             run.setText(R.string.root_activate);
             run.setEnabled(engine.isSupported());
         }
@@ -450,18 +450,18 @@ public final class MainActivity extends AppCompatActivity {
         boolean shizukuRunning = ShizukuShell.isRunning();
         boolean shizukuGranted = ShizukuShell.isGranted();
         int shizukuUid = ShizukuShell.uid();
-        String shizuku = !shizukuRunning ? "연결 안 됨"
-                : !shizukuGranted ? "권한 승인 필요"
+        String shizuku = !shizukuRunning ? "Not connected"
+                : !shizukuGranted ? "Permission required"
                 : (shizukuUid == 2000 || shizukuUid == 0)
-                ? "연결됨" : "권한 제한";
-        String rootState = state.terminationUnconfirmed() ? "확인 필요"
-                : state.ready() ? "활성"
-                : state.bootstrap() ? "준비됨" : "비활성";
+                ? "Connected" : "Permission limited";
+        String rootState = state.terminationUnconfirmed() ? "Check required"
+                : state.ready() ? "Active"
+                : state.bootstrap() ? "Ready" : "Inactive";
         String manager = getPackageManager().getLaunchIntentForPackage(
-                KSU_MANAGER_PACKAGE) == null ? "설치 필요" : "설치됨";
-        String attempted = engine.hasAttemptedThisBoot() ? "실행 완료" : "실행 전";
+                KSU_MANAGER_PACKAGE) == null ? "Install required" : "Installed";
+        String attempted = engine.hasAttemptedThisBoot() ? "Completed" : "Not run";
         dashboard.setText(getString(R.string.dashboard_format,
-                engine.isSupported() ? "지원됨" : "지원 안 됨",
+                engine.isSupported() ? "Supported" : "Not supported",
                 shizuku, rootState, manager, attempted));
     }
 
@@ -475,21 +475,21 @@ public final class MainActivity extends AppCompatActivity {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             statusRefresh.setEnabled(true);
             if (state.ready()) {
-                setStatus("임시 루트 활성", STATUS_SUCCESS);
-                setStatusDetail("KernelSU 3.2.5 · 재부팅 시 해제");
+                setStatus("Temporary root active", STATUS_SUCCESS);
+                setStatusDetail("KernelSU 3.2.5 · cleared on reboot");
                 run.setVisibility(View.GONE);
                 openPackage(KSU_MANAGER_PACKAGE,
-                        "KernelSU Manager가 설치되어 있지 않습니다.");
+                        "KernelSU Manager is not installed.");
             } else if (state.bootstrap()) {
                 run.setVisibility(View.VISIBLE);
-                setStatus("루트 준비됨", STATUS_WORKING);
-                setStatusDetail("KernelSU 활성화를 다시 시도할 수 있습니다.");
+                setStatus("Root ready", STATUS_WORKING);
+                setStatusDetail("You can try activating KernelSU again.");
                 run.setText(R.string.run_kernel_su_reactivate);
                 run.setEnabled(true);
             } else {
                 run.setVisibility(View.VISIBLE);
-                setStatus("임시 루트 활성화 실패", STATUS_WARNING);
-                setStatusDetail("기기를 재부팅한 뒤 상태를 다시 확인하세요.");
+                setStatus("Temporary root activation failed", STATUS_WARNING);
+                setStatusDetail("Reboot the device and check the status again.");
                 run.setEnabled(false);
             }
             reapplyModules.setEnabled(state.ready());
@@ -500,12 +500,12 @@ public final class MainActivity extends AppCompatActivity {
 
     private void finishUnconfirmedRun() {
         running.set(false);
-        append("프로세스 제어가 끊겨 종료를 증명하지 못했습니다. 재부팅 전 재시도하지 마세요.");
+        append("Process control was lost, so termination could not be proven. Do not retry before reboot.");
         ui.post(() -> {
             run.setVisibility(View.VISIBLE);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            setStatus("작업 상태 확인 불가", STATUS_WARNING);
-            setStatusDetail("재부팅 전에는 같은 작업을 다시 실행하지 마세요.");
+            setStatus("Operation status unknown", STATUS_WARNING);
+            setStatusDetail("Do not run the same operation again before reboot.");
             run.setText(R.string.run_reboot_check);
             run.setEnabled(false);
             reapplyModules.setEnabled(false);
@@ -518,7 +518,7 @@ public final class MainActivity extends AppCompatActivity {
         Intent launch = getPackageManager().getLaunchIntentForPackage(packageName);
         if (launch == null) {
             append(missingMessage);
-            setStatus("관리 앱을 열 수 없음", STATUS_NEUTRAL);
+            setStatus("Cannot open manager app", STATUS_NEUTRAL);
             setStatusDetail(missingMessage);
             return;
         }
@@ -529,9 +529,9 @@ public final class MainActivity extends AppCompatActivity {
     private void shareLastLog() {
         File file = engine.lastRootLog();
         if (!file.isFile()) {
-            append("공유할 실행 로그가 아직 없습니다.");
-            setStatus("진단 보고서 없음", STATUS_NEUTRAL);
-            setStatusDetail("임시 루트를 한 번 실행한 뒤 보고서를 만들 수 있습니다.");
+            append("There is no run log to save yet.");
+            setStatus("No diagnostic report", STATUS_NEUTRAL);
+            setStatusDetail("Run temporary root once before creating a report.");
             return;
         }
         try {
@@ -542,7 +542,7 @@ public final class MainActivity extends AppCompatActivity {
                     .putExtra(Intent.EXTRA_TEXT, text);
             startActivity(Intent.createChooser(share, getString(R.string.share_chooser)));
         } catch (IOException error) {
-            append("로그 읽기 실패: " + error.getMessage());
+            append("Could not read log: " + error.getMessage());
         }
     }
 
@@ -555,7 +555,7 @@ public final class MainActivity extends AppCompatActivity {
             input.readFully(bytes);
             String text = new String(bytes, StandardCharsets.UTF_8);
             if (skipped == 0) return text;
-            return "[앞부분 및 절단된 첫 행 생략]\n"
+            return "[Beginning and truncated first line omitted]\n"
                     + LogRedactor.dropPartialFirstLine(text);
         }
     }
