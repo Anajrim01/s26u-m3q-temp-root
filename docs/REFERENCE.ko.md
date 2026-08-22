@@ -6,11 +6,11 @@
 | --- | --- |
 | Application ID | `dev.indevelopment.m3qroot.hardened` |
 | 버전 | `0.5.6` (`versionCode 14`) |
-| 모델 | `SM-S948N` |
+| 모델 | `SM-S948B` |
 | Android build ID | `BP4A.251205.006` |
-| 펌웨어 | `S948NKSS4AZG3_OKR4AZG3` |
-| 커널 | `6.12.30-android16-5-pd30ff70-abogkiS948NKSS4AZG3-4k` |
-| Kernel Image SHA-256 | `d89be418252f9bd37a7f6540a3bda5ae23c683a0320855b23ad2fdecada5f7df` |
+| 펌웨어 | `S948BXXS4AZG5_OXM4AZG5` |
+| 커널 | `6.12.30-android16-5-pd30ff70-abogkiS948BXXS4AZG5-4k` |
+| Kernel Image SHA-256 | `ab3c3b3a69a459548fafbe0677f90a95c8ab3625f55f2b17feb7957cad758855` |
 | 포함된 ksud SHA-256 | `3ce5753203c93f4d733fbc10eebd7a69152189afb1d2a15bfd855bd6b5d4f622` |
 
 ## 빌드 그래프
@@ -21,8 +21,8 @@
 | --- | --- | --- |
 | `su_daemon_aarch64_pie.app` | `libm3qroot.so` | root helper와 bootstrap daemon |
 | `slide_oracle.app.so` | `libm3qoracle.so` | 정확한 physical-P0 KASLR fallback |
-| `preload.app.so` | `libm3qpayload.so` | AZG3 kernel payload |
-| `android/prebuilt/ksud-m3q-S948NKSS4AZG3-kdp` | `libm3qksud.so` | 정확한 KernelSU late-load helper |
+| `preload.app.so` | `libm3qpayload.so` | AZG5 kernel payload |
+| `android/prebuilt/ksud-m3q-S948BXXS4AZG5-kdp` | `libm3qksud.so` | 정확한 KernelSU late-load helper |
 
 Gradle `prepareM3qPayloads` task가 패키징 전에 이 파일들을 `src/main/jniLibs/arm64-v8a`로 복사합니다. 생성된 JNI 파일과 APK는 Git에서 제외합니다.
 
@@ -33,7 +33,7 @@ Gradle `prepareM3qPayloads` task가 패키징 전에 이 파일들을 `src/main/
 | `android/app/src/main/java/.../M3qRootEngine.java` | identity gate, one-shot 정책, native process 제어, KernelSU handoff |
 | `android/app/src/main/java/.../MainActivity.java` | 수동 UI와 상태 dashboard |
 | `android/app/src/main/java/.../RootSafetyPolicy.java` | 부팅 후 180초 안전 대기 |
-| `exploit/src/targets/m3q-BP4A.251205.006/` | 정확한 AZG3 payload 로직과 offsets |
+| `exploit/src/targets/m3q-BP4A.251205.006/` | 정확한 AZG5 payload 로직과 offsets |
 | `exploit/src/base/samsung-bp4a/` | 공용 Samsung BP4A 커널 레이아웃 헤더 |
 | `exploit/src/` | 공용 native helper, stage-3 support, daemon 코드 |
 | `exploit/vendor/root-my-galaxy/` | 정확한 Image fingerprint와 physical-P0 oracle |
@@ -72,7 +72,7 @@ APK 게시 전 확인 사항:
 
 ## 이식 경계
 
-다른 펌웨어 지원에는 fingerprint, Kernel Image hash, KASLR 근거, 구조체 offsets, allocator geometry, carrier layout, workqueue layout, KernelSU module, 모든 포함 파일 hash의 재산출이 필요합니다. 새 target을 추가하더라도 AZG3 fail-closed gate를 약화하면 안 됩니다.
+다른 펌웨어 지원에는 fingerprint, Kernel Image hash, KASLR 근거, 구조체 offsets, allocator geometry, carrier layout, workqueue layout, KernelSU module, 모든 포함 파일 hash의 재산출이 필요합니다. 새 target을 추가하더라도 AZG5 fail-closed gate를 약화하면 안 됩니다.
 
 ## Upstream 참고 자료
 

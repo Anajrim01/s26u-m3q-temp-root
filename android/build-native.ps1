@@ -28,7 +28,7 @@ $oracleArgs = @(
   '-O2', '-g0', '-Wall', '-Wextra', '-Werror',
   '-Wno-unused-parameter', '-Wno-sign-compare', '-Wno-unused-function',
   '-DAPP_PAYLOAD=1', '-fPIC', '-Ivendor\root-my-galaxy\src',
-  '-DTARGET_HEADER=\"targets/m3q-S948NKSS4AZG3/target.h\"',
+  '-DTARGET_HEADER=\"targets/m3q-S948BXXS4AZG5/target.h\"',
   'vendor\root-my-galaxy\src\main.c',
   'vendor\root-my-galaxy\src\util.c',
   'vendor\root-my-galaxy\src\slide_app.c',

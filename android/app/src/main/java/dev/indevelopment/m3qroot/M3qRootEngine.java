@@ -41,19 +41,19 @@ final class M3qRootEngine {
         }
     }
 
-    private static final String MODEL = "SM-S948N";
+    private static final String MODEL = "SM-S948B";
     private static final String KERNEL =
-            "6.12.30-android16-5-pd30ff70-abogkiS948NKSS4AZG3-4k";
+            "6.12.30-android16-5-pd30ff70-abogkiS948BXXS4AZG5-4k";
     private static final String FINGERPRINT =
-            "samsung/m3qksx/m3q:16/BP4A.251205.006/" +
-                    "S948NKSS4AZG3_OKR4AZG3:user/release-keys";
+            "samsung/m3qxeea/m3q:16/BP4A.251205.006/" +
+                    "S948BXXS4AZG5_OXM4AZG5:user/release-keys";
     private static final long KIMAGE_BASE = 0xffffffc080000000L;
     private static final String HELPER = "libm3qroot.so";
     private static final String ORACLE = "libm3qoracle.so";
     private static final String PAYLOAD = "libm3qpayload.so";
     private static final String KSUD = "libm3qksud.so";
     private static final String KSU_LOADER_PATH =
-            "/data/local/tmp/ksud-m3q-S948NKSS4AZG3-kdp";
+            "/data/local/tmp/ksud-m3q-S948BXXS4AZG5-kdp";
     private static final String KSU_STAGE_PATH = "/data/local/tmp/.ksud-stage";
     private static final String KSU_LOG_PATH =
             "/data/local/tmp/m3q-kernelsu-late-load.log";
@@ -206,7 +206,7 @@ final class M3qRootEngine {
         log("P0 slide 확정: " + verdict.argument());
 
         status("임시 루트 활성화 중", STATUS_WORKING);
-        log("2/2: 검증된 slide로 AZG3 root-single 실행");
+        log("2/2: 검증된 slide로 AZG5 root-single 실행");
         ProcessBuilder rootProcess = payloadProcess(helper, payload);
         Map<String, String> env = rootProcess.environment();
         configureRootEnvironment(env, false, verdict.argument());
@@ -355,7 +355,7 @@ final class M3qRootEngine {
             return 126;
         }
         status("Shizuku로 임시 루트 활성화 중", STATUS_WORKING);
-        log("1/1: shell tracefs KASLR gate로 AZG3 root-single 실행");
+        log("1/1: shell tracefs KASLR gate로 AZG5 root-single 실행");
         Map<String, String> env = new HashMap<>();
         env.put("HOME", "/data/local/tmp");
         env.put("TMPDIR", "/data/local/tmp");

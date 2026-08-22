@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">M3Q Root</string>
     <string name="app_title">M3Q Root</string>
-    <string name="app_subtitle">Galaxy S26 Ultra · AZG3 전용 · 재부팅 시 해제</string>
+    <string name="app_subtitle">Galaxy S26 Ultra · AZG5 전용 · 재부팅 시 해제</string>
     <string name="status_section">현재 상태</string>
     <string name="status_checking">루트 상태 확인 중</string>
     <string name="status_checking_detail">KernelSU와 Shizuku 연결을 확인하고 있습니다.</string>
@@ -29,7 +29,7 @@
     <string name="version_label">v0.5.6</string>
     <string name="cancel">취소</string>
     <string name="root_dialog_title">임시 루트를 활성화할까요?</string>
-    <string name="root_dialog_message">SM-S948N AZG3 전용 RAM-only 방식입니다. 시스템 파티션과 Knox는 수정하지 않으며, 재부팅하면 루트가 해제됩니다.\n\n실행 중 기기가 재부팅될 수 있으므로 중요한 작업을 저장하세요. 성공 후 앱별 루트 권한은 KernelSU에서 관리합니다.</string>
+    <string name="root_dialog_message">SM-S948B AZG5 전용 RAM-only 방식입니다. 시스템 파티션과 Knox는 수정하지 않으며, 재부팅하면 루트가 해제됩니다.\n\n실행 중 기기가 재부팅될 수 있으므로 중요한 작업을 저장하세요. 성공 후 앱별 루트 권한은 KernelSU에서 관리합니다.</string>
     <string name="root_dialog_confirm">루트 활성화</string>
     <string name="soft_root_dialog_title">KernelSU 모듈을 재로드할까요?</string>
     <string name="soft_root_dialog_message">현재 활성화된 모든 KernelSU 모듈의 late-load, mount, service 단계를 다시 실행합니다. LSPosed뿐 아니라 다른 모듈도 함께 실행되므로 충돌이 의심되는 모듈은 먼저 꺼 주세요.\n\n이 작업은 커널이나 Android 앱 환경을 재시작하지 않습니다. 완료 후 ‘소프트 부팅’을 실행하세요.</string>

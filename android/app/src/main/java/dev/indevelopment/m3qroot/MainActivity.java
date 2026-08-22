@@ -108,9 +108,9 @@ public final class MainActivity extends AppCompatActivity {
 
         if (!engine.isSupported()) {
             setStatus("지원되지 않는 펌웨어", STATUS_WARNING);
-            setStatusDetail("이 앱은 SM-S948N AZG3 펌웨어에서만 실행할 수 있습니다.");
+            setStatusDetail("이 앱은 SM-S948B AZG5 펌웨어에서만 실행할 수 있습니다.");
             run.setEnabled(false);
-            append("정확한 SM-S948N AZG3 빌드에서만 실행할 수 있습니다.");
+            append("정확한 SM-S948B AZG5 빌드에서만 실행할 수 있습니다.");
         } else {
             setStatus(getString(R.string.status_checking), STATUS_WORKING);
             setStatusDetail(getString(R.string.status_checking_detail));

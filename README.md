@@ -2,7 +2,7 @@
 
 [한국어](README.ko.md)
 
-A manual, reboot-ephemeral KernelSU root launcher for one exact Korean Galaxy S26 Ultra firmware build.
+A manual, reboot-ephemeral KernelSU root launcher for one exact international Galaxy S26 Ultra firmware build.
 
 > **Exact target only.** Do not install or run this build on another model, region, firmware, or kernel. A failed kernel attempt can panic or reboot the device.
 
@@ -10,11 +10,11 @@ A manual, reboot-ephemeral KernelSU root launcher for one exact Korean Galaxy S2
 
 | Field | Required value |
 | --- | --- |
-| Model | `SM-S948N` |
-| Device / product | `m3q` / `m3qksx` |
-| Firmware | `S948NKSS4AZG3_OKR4AZG3` |
+| Model | `SM-S948B` |
+| Device / product | `m3q` / `m3qxeea` |
+| Firmware | `S948BXXS4AZG5_OXM4AZG5` |
 | Android build | `BP4A.251205.006` |
-| Kernel | `6.12.30-android16-5-pd30ff70-abogkiS948NKSS4AZG3-4k` |
+| Kernel | `6.12.30-android16-5-pd30ff70-abogkiS948BXXS4AZG5-4k` |
 | App | `M3Q Root 0.5.6` (`versionCode 14`) |
 
 The app checks the model, full build fingerprint, and kernel release before enabling a kernel action. Any mismatch is rejected.
@@ -85,7 +85,7 @@ The published APK is development-signed so it can update the previously tested a
 ```text
 android/                         Android app and build scripts
 exploit/src/                     shared native components
-exploit/src/targets/m3q-.../     exact AZG3 target
+exploit/src/targets/m3q-.../     exact AZG5 target
 exploit/vendor/root-my-galaxy/   physical-P0 fallback and provenance
 docs/                            concise runtime and technical documentation
 ```

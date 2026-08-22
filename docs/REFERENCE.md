@@ -6,11 +6,11 @@
 | --- | --- |
 | Application ID | `dev.indevelopment.m3qroot.hardened` |
 | Version | `0.5.6` (`versionCode 14`) |
-| Model | `SM-S948N` |
+| Model | `SM-S948B` |
 | Android build ID | `BP4A.251205.006` |
-| Firmware | `S948NKSS4AZG3_OKR4AZG3` |
-| Kernel | `6.12.30-android16-5-pd30ff70-abogkiS948NKSS4AZG3-4k` |
-| Kernel Image SHA-256 | `d89be418252f9bd37a7f6540a3bda5ae23c683a0320855b23ad2fdecada5f7df` |
+| Firmware | `S948BXXS4AZG5_OXM4AZG5` |
+| Kernel | `6.12.30-android16-5-pd30ff70-abogkiS948BXXS4AZG5-4k` |
+| Kernel Image SHA-256 | `ab3c3b3a69a459548fafbe0677f90a95c8ab3625f55f2b17feb7957cad758855` |
 | Bundled ksud SHA-256 | `3ce5753203c93f4d733fbc10eebd7a69152189afb1d2a15bfd855bd6b5d4f622` |
 
 ## Build graph
@@ -21,8 +21,8 @@
 | --- | --- | --- |
 | `su_daemon_aarch64_pie.app` | `libm3qroot.so` | root helper and bootstrap daemon |
 | `slide_oracle.app.so` | `libm3qoracle.so` | exact physical-P0 KASLR fallback |
-| `preload.app.so` | `libm3qpayload.so` | AZG3 kernel payload |
-| `android/prebuilt/ksud-m3q-S948NKSS4AZG3-kdp` | `libm3qksud.so` | exact KernelSU late-load helper |
+| `preload.app.so` | `libm3qpayload.so` | AZG5 kernel payload |
+| `android/prebuilt/ksud-m3q-S948BXXS4AZG5-kdp` | `libm3qksud.so` | exact KernelSU late-load helper |
 
 Gradle's `prepareM3qPayloads` task copies these files into `src/main/jniLibs/arm64-v8a` before packaging. Generated JNI files and APKs are ignored by Git.
 
@@ -33,7 +33,7 @@ Gradle's `prepareM3qPayloads` task copies these files into `src/main/jniLibs/arm
 | `android/app/src/main/java/.../M3qRootEngine.java` | identity gate, one-shot policy, native process control, KernelSU handoff |
 | `android/app/src/main/java/.../MainActivity.java` | manual UI and status dashboard |
 | `android/app/src/main/java/.../RootSafetyPolicy.java` | 180-second boot-settle gate |
-| `exploit/src/targets/m3q-BP4A.251205.006/` | exact AZG3 payload logic and offsets |
+| `exploit/src/targets/m3q-BP4A.251205.006/` | exact AZG5 payload logic and offsets |
 | `exploit/src/base/samsung-bp4a/` | shared Samsung BP4A kernel layout headers |
 | `exploit/src/` | shared native helpers, stage-3 support, daemon code |
 | `exploit/vendor/root-my-galaxy/` | exact Image fingerprint and physical-P0 oracle |
@@ -72,7 +72,7 @@ Before publishing an APK:
 
 ## Porting boundary
 
-Supporting another firmware requires re-deriving the fingerprint, kernel Image hash, KASLR evidence, structure offsets, allocator geometry, carrier layout, workqueue layout, KernelSU module, and every embedded hash. Adding a new target must not weaken the AZG3 fail-closed gate.
+Supporting another firmware requires re-deriving the fingerprint, kernel Image hash, KASLR evidence, structure offsets, allocator geometry, carrier layout, workqueue layout, KernelSU module, and every embedded hash. Adding a new target must not weaken the AZG5 fail-closed gate.
 
 ## Upstream references
 

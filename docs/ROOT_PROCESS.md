@@ -6,9 +6,9 @@ This document describes the runtime path used by the Android app. It is not a po
 
 `M3qRootEngine` requires all of the following to match:
 
-- `Build.MODEL == SM-S948N`
-- the exact AZG3 Android fingerprint
-- the exact AZG3 kernel release string
+- `Build.MODEL == SM-S948B`
+- the exact AZG5 Android fingerprint
+- the exact AZG5 kernel release string
 
 The app disables every kernel action on a mismatch.
 
@@ -33,7 +33,7 @@ The physical-P0 route is a fallback. For practical use, start and authorize Shiz
 
 The native payload uses the CVE-2026-43499 dangling PI-waiter condition, reclaims the required order-3 workspace, and reconstructs the waiter through `pselect()` fd sets. Two isolated sacrificial regions must produce fast, bounded walk verdicts before carrier writes begin.
 
-The AZG3 target then converts two owned `/dev/zero` file objects into bounded address and data carriers. It verifies unique FD ownership, performs a scratch round trip, and restores the temporary uinput list/minor mutation. Ambiguous ownership or restoration keeps the workspace alive and fails closed.
+The AZG5 target then converts two owned `/dev/zero` file objects into bounded address and data carriers. It verifies unique FD ownership, performs a scratch round trip, and restores the temporary uinput list/minor mutation. Ambiguous ownership or restoration keeps the workspace alive and fails closed.
 
 ## 5. UID-scoped root bridge
 

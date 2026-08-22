@@ -6,9 +6,9 @@ Android 앱이 실제로 사용하는 런타임 흐름입니다. 다른 펌웨�
 
 `M3qRootEngine`은 다음 값을 모두 확인합니다.
 
-- `Build.MODEL == SM-S948N`
-- 정확한 AZG3 Android fingerprint
-- 정확한 AZG3 커널 release 문자열
+- `Build.MODEL == SM-S948B`
+- 정확한 AZG5 Android fingerprint
+- 정확한 AZG5 커널 release 문자열
 
 하나라도 다르면 앱의 모든 커널 작업을 막습니다.
 
@@ -33,7 +33,7 @@ Physical-P0 경로는 fallback입니다. 실제 사용에서는 Shizuku를 먼�
 
 Native payload는 CVE-2026-43499 dangling PI waiter 조건을 만들고 필요한 order-3 workspace를 재할당한 뒤 `pselect()` fd-set으로 waiter를 재구성합니다. Carrier write 전에 서로 분리된 희생 region 두 개가 빠르고 제한 시간 안의 walk 판정을 모두 통과해야 합니다.
 
-AZG3 target은 소유한 `/dev/zero` file object 두 개를 address/data carrier로 전환합니다. 정확히 하나의 FD가 각 carrier를 소유하는지 확인하고 scratch round trip을 거친 뒤 임시 uinput list/minor 변경을 복원합니다. 소유권이나 복원 결과가 애매하면 workspace를 유지하고 실패로 닫습니다.
+AZG5 target은 소유한 `/dev/zero` file object 두 개를 address/data carrier로 전환합니다. 정확히 하나의 FD가 각 carrier를 소유하는지 확인하고 scratch round trip을 거친 뒤 임시 uinput list/minor 변경을 복원합니다. 소유권이나 복원 결과가 애매하면 workspace를 유지하고 실패로 닫습니다.
 
 ## 5. UID 제한 root bridge
 

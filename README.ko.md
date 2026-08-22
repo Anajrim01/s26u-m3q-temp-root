@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-정확히 한 가지 국내판 Galaxy S26 Ultra 펌웨어만 지원하는 수동 KernelSU 임시 루트 앱입니다. 재부팅하면 루트가 해제됩니다.
+정확히 한 가지 국제판 Galaxy S26 Ultra 펌웨어만 지원하는 수동 KernelSU 임시 루트 앱입니다. 재부팅하면 루트가 해제됩니다.
 
 > **지원 대상이 정확히 일치할 때만 사용하세요.** 다른 모델, 지역, 펌웨어, 커널에서는 설치하거나 실행하지 마세요. 커널 작업 실패 시 기기가 재부팅되거나 커널 패닉이 발생할 수 있습니다.
 
@@ -10,11 +10,11 @@
 
 | 항목 | 필수 값 |
 | --- | --- |
-| 모델 | `SM-S948N` |
-| 기기 / 제품 | `m3q` / `m3qksx` |
-| 펌웨어 | `S948NKSS4AZG3_OKR4AZG3` |
+| 모델 | `SM-S948B` |
+| 기기 / 제품 | `m3q` / `m3qxeea` |
+| 펌웨어 | `S948BXXS4AZG5_OXM4AZG5` |
 | Android 빌드 | `BP4A.251205.006` |
-| 커널 | `6.12.30-android16-5-pd30ff70-abogkiS948NKSS4AZG3-4k` |
+| 커널 | `6.12.30-android16-5-pd30ff70-abogkiS948BXXS4AZG5-4k` |
 | 앱 | `M3Q Root 0.5.6` (`versionCode 14`) |
 
 앱은 모델, 전체 빌드 fingerprint, 커널 release 문자열을 모두 확인합니다. 하나라도 다르면 커널 작업을 허용하지 않습니다.
@@ -85,7 +85,7 @@ APK는 `android/app/build/outputs/apk/release/app-release.apk`에 생성됩니�
 ```text
 android/                         Android 앱과 빌드 스크립트
 exploit/src/                     공용 네이티브 구성요소
-exploit/src/targets/m3q-.../     정확한 AZG3 target
+exploit/src/targets/m3q-.../     정확한 AZG5 target
 exploit/vendor/root-my-galaxy/   physical-P0 fallback과 출처
 docs/                            간결한 실행 과정과 기술 문서
 ```

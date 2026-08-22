@@ -3,7 +3,7 @@ plugins {
 }
 
 def nativeBin = rootProject.file('../exploit/build/m3q-BP4A.251205.006/bin')
-def ksudBin = rootProject.file('prebuilt/ksud-m3q-S948NKSS4AZG3-kdp')
+def ksudBin = rootProject.file('prebuilt/ksud-m3q-S948BXXS4AZG5-kdp')
 def jniOut = file('src/main/jniLibs/arm64-v8a')
 
 tasks.register('prepareM3qPayloads', Copy) {
