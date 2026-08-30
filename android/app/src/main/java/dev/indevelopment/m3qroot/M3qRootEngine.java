@@ -60,7 +60,7 @@ final class M3qRootEngine {
     private static final String KSU_MANAGER_PACKAGE = "me.weishu.kernelsu";
     private static final String MODULE_RELOAD_HOOK_DIR = "/data/adb/boot-completed.d";
     private static final String KSUD_SHA256 =
-            "99aaa607e9c9da6a0e898366ecf0a14dd67224ea726d952d1ce575e62d3b5c41";
+            "7a03fe0374cae944541a9ad59c243c387ff9caaeaa158b76580fd028a993625f";
     private static final String SAFETY_PREFS = "kernel_run_safety";
     private static final String ATTEMPT_BOOT_ID = "attempt_boot_id";
     private static final String VERIFIED_KSU_BOOT_ID = "verified_ksu_boot_id";
