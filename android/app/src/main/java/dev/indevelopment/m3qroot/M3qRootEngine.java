@@ -60,7 +60,7 @@ final class M3qRootEngine {
     private static final String KSU_MANAGER_PACKAGE = "me.weishu.kernelsu";
     private static final String MODULE_RELOAD_HOOK_DIR = "/data/adb/boot-completed.d";
     private static final String KSUD_SHA256 =
-            "3ce5753203c93f4d733fbc10eebd7a69152189afb1d2a15bfd855bd6b5d4f622";
+            "99aaa607e9c9da6a0e898366ecf0a14dd67224ea726d952d1ce575e62d3b5c41";
     private static final String SAFETY_PREFS = "kernel_run_safety";
     private static final String ATTEMPT_BOOT_ID = "attempt_boot_id";
     private static final String VERIFIED_KSU_BOOT_ID = "verified_ksu_boot_id";
@@ -135,7 +135,7 @@ final class M3qRootEngine {
             return new RootState(false, false, true, ksuOutput);
         }
         boolean kernelSu = ksuCode == 0
-                && ksuOutput.contains("KernelSU control verified version=32525");
+                && ksuOutput.contains("KernelSU control verified version=32601");
         if (kernelSu) {
             markKernelSuVerifiedForThisBoot();
             return new RootState(true, false, false, ksuOutput);
@@ -506,7 +506,7 @@ final class M3qRootEngine {
             log("Late-load finished, but KernelSU control verification failed.");
             return 124;
         }
-        log("KernelSU 3.2.5 LKM late-load verification completed");
+        log("KernelSU 3.3.0 LKM late-load verification completed");
         return 0;
     }
 
@@ -537,7 +537,7 @@ final class M3qRootEngine {
                 + "fi\n"
                 + "info=$(\"$ksud\" debug info 2>&1)\n"
                 + "printf '%s\\n' \"$info\"\n"
-                + "printf '%s\\n' \"$info\" | grep -Fqx 'version: 32525' || exit 125\n"
+                + "printf '%s\\n' \"$info\" | grep -Fqx 'version: 32601' || exit 125\n"
                 + "printf '%s\\n' \"$info\" | grep -Fqx 'late_load: true' || exit 125\n";
     }
 

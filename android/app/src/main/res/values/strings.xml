@@ -26,7 +26,7 @@
     <string name="hide_diagnostics">Hide diagnostic log</string>
     <string name="diagnostics_title">Advanced diagnostic log</string>
     <string name="diagnostics_description">Technical details and run history. Not needed for typical use.</string>
-    <string name="version_label">v0.5.6</string>
+    <string name="version_label">v0.5.7</string>
     <string name="cancel">Cancel</string>
     <string name="root_dialog_title">Activate temporary root?</string>
     <string name="root_dialog_message">RAM-only temporary root for SM-S948B AZG5. It does not modify the system partition or Knox, and root is cleared on reboot.\n\nSave important work because the device may reboot while the exploit runs. After success, manage per-app root permissions in KernelSU.</string>

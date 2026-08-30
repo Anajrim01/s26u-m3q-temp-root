@@ -418,7 +418,7 @@ public final class MainActivity extends AppCompatActivity {
             run.setEnabled(false);
         } else if (state.ready()) {
             setStatus("Temporary root active", STATUS_SUCCESS);
-            setStatusDetail("KernelSU 3.2.5 · cleared on reboot");
+            setStatusDetail("KernelSU 3.3.0 · cleared on reboot");
             run.setVisibility(View.GONE);
         } else if (state.bootstrap()) {
             run.setVisibility(View.VISIBLE);
@@ -476,7 +476,7 @@ public final class MainActivity extends AppCompatActivity {
             statusRefresh.setEnabled(true);
             if (state.ready()) {
                 setStatus("Temporary root active", STATUS_SUCCESS);
-                setStatusDetail("KernelSU 3.2.5 · cleared on reboot");
+                setStatusDetail("KernelSU 3.3.0 · cleared on reboot");
                 run.setVisibility(View.GONE);
                 openPackage(KSU_MANAGER_PACKAGE,
                         "KernelSU Manager is not installed.");

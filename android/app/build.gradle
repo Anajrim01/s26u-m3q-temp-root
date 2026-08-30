@@ -22,18 +22,38 @@ tasks.register('prepareM3qPayloads', Copy) {
     into(jniOut)
 }
 
+tasks.register('verifyM3qPayloads') {
+    dependsOn(tasks.named('prepareM3qPayloads'))
+
+    doLast {
+        def required = [
+            'libm3qroot.so',
+            'libm3qpayload.so',
+            'libm3qoracle.so',
+            'libm3qksud.so'
+        ]
+        def missing = required.findAll { name ->
+            !new File(jniOut, name).isFile()
+        }
+        if (!missing.isEmpty()) {
+            throw new GradleException(
+                    'Missing native payloads: ' + missing.join(', '))
+        }
+    }
+}
+
 android {
     namespace = 'dev.indevelopment.m3qroot'
     compileSdk {
-        version = release(37)
+        version = release(36)
     }
 
     defaultConfig {
         applicationId 'dev.indevelopment.m3qroot.hardened'
         minSdk 36
-        targetSdk 37
-        versionCode 14
-        versionName '0.5.6'
+        targetSdk 36
+        versionCode 15
+        versionName '0.5.7'
         ndk {
             abiFilters 'arm64-v8a'
         }
@@ -73,5 +93,5 @@ dependencies {
 }
 
 tasks.named('preBuild') {
-    dependsOn(tasks.named('prepareM3qPayloads'))
+    dependsOn(tasks.named('verifyM3qPayloads'))
 }
